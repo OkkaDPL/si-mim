@@ -1,0 +1,106 @@
+@extends('dashboard.layouts.main')
+
+@section('isibody')
+    <div class="content">
+        <div class="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/dashboard/users" method="POST">
+                        @csrf
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">{{ $title }}</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group form-floating-label">
+                                    <input id="username" name="username" type="text"
+                                        class="form-control input-border-bottom @error('username') is-invalid @enderror"
+                                        required value="{{ old('username') }}">
+                                    <label for="username" class="placeholder">Username</label>
+                                    @error('username')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group form-floating-label">
+                                    <input id="email" name="email" type="email"
+                                        class="form-control input-border-bottom @error('email') is-invalid @enderror"
+                                        required value="{{ old('email') }}">
+                                    <label for="email" class="placeholder">E-Mail</label>
+                                    @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group form-floating-label">
+                                    <input id="password" name="password" type="password"
+                                        class="form-control input-border-bottom @error('password') is-invalid @enderror"
+                                        required value="{{ old('password') }}">
+                                    <label for="password" class="placeholder">Password</label>
+                                    @error('password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group form-floating-label">
+                                    <a>Departement</a>
+                                    <select for="departement" id="departement" name="departement"
+                                        class="iniSelect form-control @error('departement') is-invalid @enderror" required>
+                                        <option value="">Select departement</option>
+                                        <option value="IT" {{ old('departement') == 'IT' ? 'selected' : '' }}>
+                                            IT
+                                        </option>
+                                        <option value="Management"
+                                            {{ old('departement') == 'Management' ? 'selected' : '' }}>
+                                            Management
+                                        </option>
+                                        <option value="Billing" {{ old('departement') == 'Billing' ? 'selected' : '' }}>
+                                            Billing</option>
+                                        <option value="Finance and Accounting"
+                                            {{ old('departement') == 'Finance and Accounting' ? 'selected' : '' }}>Finance
+                                            and
+                                            Accounting
+                                        </option>
+                                        <option value="HRD" {{ old('departement') == 'HRD' ? 'selected' : '' }}>HRD
+                                        </option>
+                                        </option>
+                                        <option value="Product" {{ old('departement') == 'Product' ? 'selected' : '' }}>
+                                            Product
+                                        </option>
+                                        <option value="Sales" {{ old('departement') == 'Sales' ? 'selected' : '' }}>
+                                            Sales
+                                        </option>
+                                        </option>
+                                        <option value="Warehouse"
+                                            {{ old('departement') == 'Warehouse' ? 'selected' : '' }}>
+                                            Warehouse
+                                        </option>
+                                    </select>
+                                    @error('departement')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="card-action">
+                                <button class="btn btn-primary" type="submit"
+                                    onclick="return confirm('Are you sure for submit this form?')">Submit</button>
+                                <a href="/dashboard/users" class="btn btn-danger"
+                                    onclick="return confirm('Are you sure for cancel this form?')">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.iniSelect').select2();
+        });
+    </script>
+@endsection
